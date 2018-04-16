@@ -1,0 +1,20 @@
+* RegistryOracleContainer
+
+This Docker container is run by [[https://oraclize.it][Oraclize.it]] to support the [[https://tzlibre.github.io/whitelist.html][TzLibre whitelisting process]]. 
+It accepts four parameters:
+
+- ~TZL_pk~: the Tz public key
+- ~ETH_addr~: the ETH address to whitelist 
+- ~ETH_addrSignature~: the signature of the ~ETH_addr~ made through the Tz secret key
+- ~declarationSignature~: the signature of a [[https://tzlibre.github.io/whitelist.html#declaration]].
+
+It verifies signatures and checks the amount of DLS tezzies got during the ICO against a snapshot of Bitcoin and Ethereum blockchains (in `db` folder). 
+
+It outputs three parameters:
+
+- ~statuscode~: ~0 -> ok~, ~1 or 2 -> error~
+- ~TZL_addr~: the address computed from ~TZL_pk~
+- ~TZL_amount~: the amount of DSL tezzies got during ICO (whitelisted ETH addresses will get the same amount of Libre tezzies)
+
+** Deployment
+~dist/archive.zip~ is deployed on IPFS at ~QmYkdYwMdj1rJ5dHhokqLmEBVyWg5j4fkDUqwgzBivN8YA~
